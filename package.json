@@ -1,0 +1,37 @@
+{
+  "name": "custom-swipe-event",
+  "version": "0.0.0",
+  "description": "horizontal custom swipe event",
+  "main": "dist/index.js",
+  "jsnext:main": "dist/index.mjs",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iliketomatoes/swipe-custom-event.git"
+  },
+  "keywords": [
+    "swipe",
+    "touch-events"
+  ],
+  "author": "Giancarlo Soverini",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/iliketomatoes/swipe-custom-event/issues"
+  },
+  "homepage": "https://github.com/iliketomatoes/swipe-custom-event#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-es2015-rollup": "^1.2.0",
+    "babel-register": "^6.18.0",
+    "babelrc-rollup": "^3.0.0",
+    "rollup": "^0.36.3",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-watch": "^2.5.0",
+    "tslint": "^3.15.1",
+    "typescript": "^2.0.6"
+  }
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SwipeCustomEvent.js</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.yellow-purple.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+	<header>
+		<h1>SwipeCustomEvent.js</h1>
+	</header>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.js"></script>
+	<script>
+		require.config({
+			paths: {
+				"swipeCustomEvent": "dist/index"
+			},
+			waitSeconds: 5
+		});
+		require(["swipeCustomEvent"],
+			function(SwipeCustomEvent) {
+				var swipeEvent = SwipeCustomEvent;
+				console.log(swipeEvent.options);
+			}
+		);
+	</script>
+</body>
+
+</html>
