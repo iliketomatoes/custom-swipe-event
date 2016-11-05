@@ -1,5 +1,6 @@
 export interface CustomSwipeEventOptions {
-	swipeThreshold: Number
+	swipeThreshold: Number,
+	touchEventsOnly: Boolean
 }
 
 export interface CustomSwipeEventsList {

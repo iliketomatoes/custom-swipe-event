@@ -6,6 +6,15 @@ export function unbind(obj: HTMLElement, type: string, fn: EventListenerOrEventL
 	obj.removeEventListener(type, fn, false);
 }
 
+export function setListener(elm: HTMLDocument, events: String, callback: EventListenerOrEventListenerObject) {
+	let eventsArray: Array<string> = events.split(' ');
+	let i = eventsArray.length;
+
+	while (i--) {
+		elm.addEventListener(eventsArray[i], callback, false);
+	}
+}
+
 export function msEventType(type: string): string {
 	let lo = type.toLowerCase();
 	let ms = 'MS' + type;
@@ -16,6 +25,6 @@ export function getTimeStamp(): number {
 	return new Date().getTime();
 }
 
-export function getPointerEvent(event: any): Event {
+export function getPointerEvent(event: any): MouseEvent {
 	return event.targetTouches ? event.targetTouches[0] : event;
 }
