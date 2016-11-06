@@ -11,7 +11,7 @@ export default {
     targets: [{
         dest: pkg['main'],
         format: 'umd',
-        moduleName: 'CustomSwipeEvent',
+        moduleName: 'customSwipeEvent',
         sourceMap: true,
         exports: 'default'
     }, {

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>SwipeCustomEvent.js</title>
+	<title>CustomSwipeEvent.js</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.yellow-purple.min.css">
@@ -12,20 +12,28 @@
 
 <body>
 	<header>
-		<h1>SwipeCustomEvent.js</h1>
+		<h1>CustomSwipeEvent.js</h1>
 	</header>
+	<main role="main">
+		<div id="test" style="width:200px; height:200px; background: green;"></div>
+	</main>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.js"></script>
 	<script>
 		require.config({
 			paths: {
-				"swipeCustomEvent": "dist/index"
+				"customSwipeEvent": "dist/index"
 			},
 			waitSeconds: 5
 		});
-		require(["swipeCustomEvent"],
-			function(SwipeCustomEvent) {
-				var swipeEvent = SwipeCustomEvent;
-				console.log(swipeEvent.options);
+		require(["customSwipeEvent"],
+			function(customSwipe) {
+				//var swipeEvent = CustomSwipe.init();
+				//console.log(CustomSwipe);
+				//swipeEvent = CustomSwipe.init();
+				//console.log(swipeEvent);
+				document.getElementById('test').addEventListener('swipe',function(e){
+					console.log(e.swipeEventSubType);
+				});
 			}
 		);
 	</script>
