@@ -3,10 +3,10 @@ Add horizontal swipe event to the document. Written in TypeScript. Source files 
 Inspired by [Tocca.js](https://github.com/GianlucaGuarini/Tocca.js).
 
 ## Usage
-Import the Javascript:
 
-```html
-<script src="path/to/custom-swipe-event/dist/index.js"></script>
+ES6 and TypeScript:
+```javascript
+import CustomSwipeEvent from 'custom-swipe-event';
 ```
 
 This Javascript library is UMD compliant, so you can require the library like this:
@@ -14,6 +14,14 @@ This Javascript library is UMD compliant, so you can require the library like th
 ```javascript
 require('customSwipeEvent');
 ```
+
+On the browser:
+
+```html
+<script src="path/to/custom-swipe-event/dist/index.js"></script>
+```
+
+
 
 Then you can set the custom swipe event listener on any HTML element.
 Let's assume you have an element like this:

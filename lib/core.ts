@@ -48,7 +48,7 @@ export namespace CustomSwipe {
 		if (html == null) return false;
 
 		// In case some other framework has already instantiated custom-swipe-event
-		if(html.classList.contains('custom-swipe-event-enabled')) return true;
+		if (html.classList.contains('custom-swipe-event-enabled')) return true;
 
 		//setting the events listeners
 		// we need to debounce the callbacks because some devices multiple events are triggered at same time
@@ -105,7 +105,7 @@ export namespace CustomSwipe {
 		}
 
 		deltaY = cachedY - currY;
-    deltaX = cachedX - currX;
+		deltaX = cachedX - currX;
 
 		sendEvent(TARGET, 'swipeend', { x: Math.abs(deltaX), y: Math.abs(deltaY) });
 		TARGET = null;
@@ -121,7 +121,7 @@ export namespace CustomSwipe {
 		currY = pointer.pageY;
 
 		deltaY = cachedY - currY;
-    deltaX = cachedX - currX;
+		deltaX = cachedX - currX;
 
 		if (TARGET) {
 			sendEvent(TARGET, 'swipemove', { x: Math.abs(deltaX), y: Math.abs(deltaY) });
