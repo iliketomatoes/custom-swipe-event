@@ -88,7 +88,7 @@ var typicalCB = function(e) {
    if (e.swipeEventSubType === 'swipestart') {
      // Do stuff when the swipe event starts
    } else {
-     if(e.swipeEventSubType === 'swipesmove') {
+     if(e.swipeEventSubType === 'swipemove') {
        // Do different stuff when the swipe event is unfolding
      } else {
        // In the end, do something else when the swipe event ends
