@@ -1,5 +1,7 @@
 import { CustomSwipe } from "./core";
 
-export default (function(doc){
-  CustomSwipe.init(doc);
+const CustomSwipeEvent: boolean = (function(doc){
+  return CustomSwipe.init(doc);
 }(window.document));
+
+export default CustomSwipeEvent;

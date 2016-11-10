@@ -1,4 +1,4 @@
-import { msEventType, getTimeStamp, getPointerEvent } from "./utils";
+import { msEventType, getPointerEvent } from "./utils";
 
 interface CustomSwipeEventsList {
 	touchstart: string,
@@ -11,11 +11,7 @@ interface CustomSwipeEventDistance {
 	y: number
 }
 
-enum CustomSwipeEventSubType {
-	SwipeStart,
-	SwipeMove,
-	SwipeEnd
-}
+type CustomSwipeEventSubType = "swipestart" | "swipemove" | "swipeend";
 
 interface CustomSwipeEventData {
 	x: number,
@@ -44,13 +40,25 @@ export namespace CustomSwipe {
 	let deltaX: number;
 	let deltaY: number;
 
-	export function init(doc: HTMLDocument) {
+	export function init(doc: HTMLDocument): boolean {
+
+		let html: HTMLElement = doc.documentElement;
+
+		// Return false in case there is no html element for some reason
+		if (html == null) return false;
+
+		// In case some other framework has already instantiated custom-swipe-event
+		if(html.classList.contains('custom-swipe-event-enabled')) return true;
 
 		//setting the events listeners
 		// we need to debounce the callbacks because some devices multiple events are triggered at same time
 		setListener(doc, touchEvents.touchstart + ' mousedown', onTouchStart);
 		setListener(doc, touchEvents.touchend + ' mouseup', onTouchEnd);
 		setListener(doc, touchEvents.touchmove + ' mousemove', onTouchMove);
+
+		html.classList.add('custom-swipe-event-enabled');
+
+		return true;
 	}
 
 	function setListener(elm: HTMLDocument, events: String, callback: EventListenerOrEventListenerObject) {
@@ -80,7 +88,7 @@ export namespace CustomSwipe {
 
 		TARGET = e.target;
 
-		sendEvent(TARGET, CustomSwipeEventSubType.SwipeStart, { x: 0, y: 0 });
+		sendEvent(TARGET, 'swipestart', { x: 0, y: 0 });
 
 	}
 
@@ -99,7 +107,7 @@ export namespace CustomSwipe {
 		deltaY = cachedY - currY;
     deltaX = cachedX - currX;
 
-		sendEvent(TARGET, CustomSwipeEventSubType.SwipeEnd, { x: Math.abs(deltaX), y: Math.abs(deltaY) });
+		sendEvent(TARGET, 'swipeend', { x: Math.abs(deltaX), y: Math.abs(deltaY) });
 		TARGET = null;
 
 	}
@@ -116,7 +124,7 @@ export namespace CustomSwipe {
     deltaX = cachedX - currX;
 
 		if (TARGET) {
-			sendEvent(TARGET, CustomSwipeEventSubType.SwipeMove, { x: Math.abs(deltaX), y: Math.abs(deltaY) });
+			sendEvent(TARGET, 'swipemove', { x: Math.abs(deltaX), y: Math.abs(deltaY) });
 		}
 	}
 

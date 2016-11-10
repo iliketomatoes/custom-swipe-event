@@ -1,6 +1,6 @@
 {
   "name": "custom-swipe-event",
-  "version": "0.0.0",
+  "version": "0.1.0-beta.1",
   "description": "horizontal custom swipe event",
   "main": "dist/index.js",
   "jsnext:main": "dist/index.mjs",
@@ -17,7 +17,7 @@
     "touch-events"
   ],
   "author": "Giancarlo Soverini",
-  "license": "GPL-3.0",
+  "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/iliketomatoes/swipe-custom-event/issues"
   },
@@ -33,5 +33,6 @@
     "rollup-watch": "^2.5.0",
     "tslint": "^3.15.1",
     "typescript": "^2.0.6"
-  }
+  },
+  "typings": "./lib/index.ts"
 }

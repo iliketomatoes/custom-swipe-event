@@ -9,17 +9,10 @@ function msEventType(type) {
     var ms = 'MS' + type;
     return window.navigator.msPointerEnabled ? ms : lo;
 }
-
 function getPointerEvent(event) {
     return event.targetTouches ? event.targetTouches[0] : event;
 }
 
-var CustomSwipeEventSubType;
-(function (CustomSwipeEventSubType) {
-    CustomSwipeEventSubType[CustomSwipeEventSubType["SwipeStart"] = 0] = "SwipeStart";
-    CustomSwipeEventSubType[CustomSwipeEventSubType["SwipeMove"] = 1] = "SwipeMove";
-    CustomSwipeEventSubType[CustomSwipeEventSubType["SwipeEnd"] = 2] = "SwipeEnd";
-})(CustomSwipeEventSubType || (CustomSwipeEventSubType = {}));
 var CustomSwipe;
 (function (CustomSwipe) {
     var TARGET = null;
@@ -37,11 +30,18 @@ var CustomSwipe;
     var deltaX = void 0;
     var deltaY = void 0;
     function init(doc) {
+        var html = doc.documentElement;
+        // Return false in case there is no html element for some reason
+        if (html == null) return false;
+        // In case some other framework has already instantiated custom-swipe-event
+        if (html.classList.contains('custom-swipe-event-enabled')) return true;
         //setting the events listeners
         // we need to debounce the callbacks because some devices multiple events are triggered at same time
         setListener(doc, touchEvents.touchstart + ' mousedown', onTouchStart);
         setListener(doc, touchEvents.touchend + ' mouseup', onTouchEnd);
         setListener(doc, touchEvents.touchmove + ' mousemove', onTouchMove);
+        html.classList.add('custom-swipe-event-enabled');
+        return true;
     }
     CustomSwipe.init = init;
     function setListener(elm, events, callback) {
@@ -64,7 +64,7 @@ var CustomSwipe;
         // caching the current y
         cachedY = currY = pointer.pageY;
         TARGET = e.target;
-        sendEvent(TARGET, CustomSwipeEventSubType.SwipeStart, { x: 0, y: 0 });
+        sendEvent(TARGET, 'swipestart', { x: 0, y: 0 });
     }
     function onTouchEnd(e) {
         var eventName = null;
@@ -77,7 +77,7 @@ var CustomSwipe;
         }
         deltaY = cachedY - currY;
         deltaX = cachedX - currX;
-        sendEvent(TARGET, CustomSwipeEventSubType.SwipeEnd, { x: Math.abs(deltaX), y: Math.abs(deltaY) });
+        sendEvent(TARGET, 'swipeend', { x: Math.abs(deltaX), y: Math.abs(deltaY) });
         TARGET = null;
     }
     function onTouchMove(e) {
@@ -89,7 +89,7 @@ var CustomSwipe;
         deltaY = cachedY - currY;
         deltaX = cachedX - currX;
         if (TARGET) {
-            sendEvent(TARGET, CustomSwipeEventSubType.SwipeMove, { x: Math.abs(deltaX), y: Math.abs(deltaY) });
+            sendEvent(TARGET, 'swipemove', { x: Math.abs(deltaX), y: Math.abs(deltaY) });
         }
     }
     function sendEvent(elm, type, distance) {
@@ -118,11 +118,11 @@ var CustomSwipe;
     }
 })(CustomSwipe || (CustomSwipe = {}));
 
-var index = (function (doc) {
-    CustomSwipe.init(doc);
-})(window.document);
+var CustomSwipeEvent = function (doc) {
+    return CustomSwipe.init(doc);
+}(window.document);
 
-return index;
+return CustomSwipeEvent;
 
 })));
 //# sourceMappingURL=index.js.map
